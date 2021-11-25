@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://api.mapy.cz/loader.js"></script>
+    <script type="text/javascript">Loader.load()</script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="slideshow-container">
+
+        <h1 style="text-align: center;">Random characters from Re:Zero</h1>
+        <div class="mySlides1 fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="imgs/rem.jpg" style="width:100%">
+            <div class="text">Rem</div>
+        </div>
+
+        <div class="mySlides1 fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="imgs/subaru.jpg" style="width:100%">
+            <div class="text">Subaru</div>
+        </div>
+
+        <div class="mySlides1 fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="imgs/ram.jpg" style="width:100%">
+            <div class="text">Ram</div>
+        </div>
+
+        <a class="prev1" onclick="plusSlide(-1)">&#10094;</a>
+        <a class="next1" onclick="plusSlide(1)">&#10095;</a>
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot1" onclick="currentSlides(1)"></span>
+        <span class="dot1" onclick="currentSlides(2)"></span>
+        <span class="dot1" onclick="currentSlides(3)"></span>
+    </div>
+    <script>
+        var slideIndex = 1;
+        showSlide(slideIndex);
+
+        function plusSlide(k) {
+            showSlide(slideIndex += k);
+        }
+
+        function currentSlides(k) {
+            showSlide(slideIndex = k);
+        }
+
+        function showSlide(k) {
+
+            var i;
+            var slides = document.getElementsByClassName("mySlides1");
+            console.log(slides)
+            var dots = document.getElementsByClassName("dot1");
+            if (k > slides.length) { slideIndex = 1 }
+            if (k < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active1", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active1";
+        }
+    </script>
+
+    <div class="flex">
+        <div class="map" id="mapa" style="width:600px; height:400px;"></div>
+        <script type="text/javascript">
+            var stred = SMap.Coords.fromWGS84(14.41, 50.08);
+            var mapa = new SMap(JAK.gel("mapa"), stred, 10);
+            mapa.addDefaultLayer(SMap.DEF_BASE).enable();
+            mapa.addDefaultControls();
+        </script>
+    </div>
+    <h2 style="text-align:center">Lightbox</h2>
+
+    <div class="row">
+        <div class="column">
+            <img src="imgs/img_nature.jpg" style="width:100%" onclick="openModal();currentSlide(1)"
+                class="hover-shadow cursor">
+        </div>
+        <div class="column">
+            <img src="imgs/img_snow.jpg" style="width:100%" onclick="openModal();currentSlide(2)"
+                class="hover-shadow cursor">
+        </div>
+        <div class="column">
+            <img src="imgs/img_mountains.jpg" style="width:100%" onclick="openModal();currentSlide(3)"
+                class="hover-shadow cursor">
+        </div>
+        <div class="column">
+            <img src="imgs/img_lights.jpg" style="width:100%" onclick="openModal();currentSlide(4)"
+                class="hover-shadow cursor">
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close cursor" onclick="closeModal()">&times;</span>
+        <div class="modal-content">
+
+            <div class="mySlides">
+                <div class="numbertext">1 / 4</div>
+                <img src="imgs/img_nature_wide.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">2 / 4</div>
+                <img src="imgs/img_snow_wide.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">3 / 4</div>
+                <img src="imgs/img_mountains_wide.jpg" style="width:100%">
+            </div>
+
+            <div class="mySlides">
+                <div class="numbertext">4 / 4</div>
+                <img src="imgs/img_lights_wide.jpg" style="width:100%">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <div class="caption-container">
+                <p id="caption"></p>
+            </div>
+
+
+            <div class="column">
+                <img class="demo cursor" src="imgs/img_nature_wide.jpg" style="width:100%" onclick="currentSlide(1)"
+                    alt="Nature and sunrise">
+            </div>
+            <div class="column">
+                <img class="demo cursor" src="imgs/img_snow_wide.jpg" style="width:100%" onclick="currentSlide(2)"
+                    alt="Snow">
+            </div>
+            <div class="column">
+                <img class="demo cursor" src="imgs/img_mountains_wide.jpg" style="width:100%" onclick="currentSlide(3)"
+                    alt="Mountains and fjords">
+            </div>
+            <div class="column">
+                <img class="demo cursor" src="imgs/img_lights_wide.jpg" style="width:100%" onclick="currentSlide(4)"
+                    alt="Northern Lights">
+            </div>
+        </div>
+    </div>
+    <script>
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("demo");
+            var captionText = document.getElementById("caption");
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+            captionText.innerHTML = dots[slideIndex - 1].alt;
+        }
+    </script>
+
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan-Feb', 'Mar-Apr', 'May-Jun', 'Jul-Aug', 'Sep-Oct', 'Nov-Dec'],
+                datasets: [
+                {
+                    label: 'Based',
+                    data: [18,69,48,57,14,21],
+                    backgroundColor:
+                        'rgba(75, 192, 192, 0.2)',
+                    borderColor: 
+                        'rgba(75, 192, 192, 1)',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Opinion',
+                    data: [15,97,50,78,20,5],
+                    backgroundColor:
+                        'rgba(255, 99, 132, 0.2)',
+                    borderColor: 
+                        'rgba(255, 99, 132, 1)',
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Sus',
+                    data: [10,29,49,73,52,83],
+                    backgroundColor:
+                        'rgba(54, 162, 235, 0.2)',
+                    borderColor: 
+                        'rgba(54, 162, 235, 1)',
+                    borderWidth: 1.5
+                }
+            ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
